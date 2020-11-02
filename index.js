@@ -20,13 +20,22 @@ function createWindow() {
 }
 
 // Uygulama hazır olana kadar bekler
-app.on("ready", () => {
+app.whenReady().then(() => {
     // Evernsel bir kısayol ile uygulamayı aktif ediyoruz
-    globalShortcut.register("Control+L", createWindow)
+    if (!globalShortcut.register("Control+L", createWindow)) {
+        console.log("Kısayol kaydı başarısız")
+    }
 })
 
 // Pencereler kapandığı zaman uygulamanın sonlanmasını engeller
 app.on('window-all-closed', (e) => {
     e.preventDefault()
     e.returnValue = false
+    console.log("Uygulamanın kapanması engellendi")
+})
+
+// Uygulama kapandığında tüm kısayolları iptal ediyoruz
+app.on("will-quit", () => {
+    globalShortcut.unregisterAll()
+    console.log("Tüm kısayollar iptal edildi")
 })
