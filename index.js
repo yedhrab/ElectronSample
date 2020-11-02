@@ -1,22 +1,22 @@
 const electron = require("electron")
 const url = require("url")
-const path = require("path");
+const path = require("path")
 
-const { app, BrowserWindow, globalShortcut } = electron;
+const { app, BrowserWindow, globalShortcut } = electron
 
-let mainWindow;
-
+let mainWindow
+let tray
 
 function createWindow() {
     // Yeni bir pencere oluşturma
-    mainWindow = new BrowserWindow({});
+    mainWindow = new BrowserWindow({})
 
     // HTML verilerini yeni pencereye aktarma file://__dirname/mainWindow.html
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, "mainWindow.html"),
         protocol: "file",
         slashes: true
-    }));
+    }))
 }
 
 // Uygulama hazır olana kadar bekler
